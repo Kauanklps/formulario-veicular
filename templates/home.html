@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Início - Verificação de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-admin {
+            background-color: #dc3545;
+        }
+
+        .btn-admin:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Sistema de Verificação</h1>
+        <a href="{{ url_for('checklist.checklist') }}" class="btn">📝 Preencher Checklist</a>
+        <a href="{{ url_for('login.login') }}" class="btn btn-admin">🔒 Área Administrativa</a>
+    </div>
+</body>
+
+</html>

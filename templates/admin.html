@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklists - Administrador</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+        }
+
+        .logout {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .logout a {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .logout a:hover {
+            background-color: #c82333;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+            .logout {
+                justify-content: center;
+            }
+
+            .logout a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logout">
+        <a href="{{ url_for('logout.logout') }}">🚪 Sair</a>
+    </div>
+
+    <h2>Registros de Checklists</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Colaborador</th>
+                    <th>Veículo</th>
+                    <th>Km</th>
+                    <th>Última Validação</th>
+                    <th>Óleo</th>
+                    <th>Freio</th>
+                    <th>Aditivo</th>
+                    <th>Pneus</th>
+                    <th>Observações</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in registros %}
+                <tr>
+                    <td>{{ item.colaborador }}</td>
+                    <td>{{ item.veiculo }}</td>
+                    <td>{{ item.quilometragem }}</td>
+                    <td>{{ item.ultima_validacao }}</td>
+                    <td>{{ item.oleo }}</td>
+                    <td>{{ item.freio }}</td>
+                    <td>{{ item.aditivo }}</td>
+                    <td>{{ item.pneus }}</td>
+                    <td>{{ item.observacoes }}</td>
+                    <td>{{ item.data }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

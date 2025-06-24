@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Verificação</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        label,
+        h3 {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+            color: #333;
+            font-size: 1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .radio-group {
+            margin: 10px 0 20px 0;
+        }
+
+        .radio-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: normal;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 1.3em;
+            }
+
+            button[type="submit"] {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Checklist de Verificação de Veículos</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <label for="colaborador">Colaborador:</label>
+            <input type="text" name="colaborador" id="colaborador" required>
+
+            <label for="veiculo">Selecione o veículo:</label>
+            <select name="veiculo" id="veiculo" required>
+                <option value="">Selecione...</option>
+                <option value="Prisma">Prisma</option>
+                <option value="Uno">Uno</option>
+                <option value="Voyage">Voyage</option>
+                <option value="Corsa Cinza">Corsa Cinza</option>
+                <option value="Corsa Prata">Corsa Prata</option>
+            </select>
+
+            <label for="quilometragem">Quilometragem atual:</label>
+            <input type="number" name="quilometragem" id="quilometragem" required>
+
+            <label for="ultima_validacao">Data da última verificação de fluidos:</label>
+            <input type="date" name="ultima_validacao" id="ultima_validacao" required>
+
+            <h3>Óleo do motor:</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="oleo" value="Completo" required> ✅ Completo</label>
+                <label><input type="radio" name="oleo" value="Precisa completar"> ⚠️ Precisa completar</label>
+                <label><input type="radio" name="oleo" value="Extremamente baixo"> ❌ Extremamente baixo</label>
+            </div>
+
+            <h3>Aditivo do radiador:</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="aditivo" value="Completo" required> ✅ Completo</label>
+                <label><input type="radio" name="aditivo" value="Precisa completar"> ⚠️ Precisa completar</label>
+                <label><input type="radio" name="aditivo" value="Extremamente baixo"> ❌ Extremamente baixo</label>
+            </div>
+
+            <h3>Fluido de freio:</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="freio" value="Completo" required> ✅ Completo</label>
+                <label><input type="radio" name="freio" value="Precisa completar"> ⚠️ Precisa completar</label>
+                <label><input type="radio" name="freio" value="Extremamente baixo"> ❌ Extremamente baixo</label>
+            </div>
+
+            <h3>Os pneus estão calibrados e em bom estado?</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="pneus" value="Sim" required> Sim</label>
+                <label><input type="radio" name="pneus" value="Não"> Não</label>
+            </div>
+
+            <label for="observacoes">Observações:</label>
+            <textarea name="observacoes" id="observacoes" rows="4"></textarea>
+
+            <button type="submit">Enviar Checklist</button>
+        </form>
+    </div>
+</body>
+
+</html>
